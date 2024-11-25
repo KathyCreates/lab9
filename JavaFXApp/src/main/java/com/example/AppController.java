@@ -1,18 +1,14 @@
 package com.example;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import com.jfoenix.controls.JFXButton;
 
 public class AppController {
+    @FXML
+    private JFXButton Button;
 
     @FXML
     private void handleButtonClick() {
-        // Виводимо повідомлення після натискання кнопки
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Button Clicked");
-        alert.setHeaderText(null);
-        alert.setContentText("You clicked the button!");
-        alert.showAndWait();
+        System.out.println("Button clicked");
     }
 }
