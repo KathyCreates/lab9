@@ -1,35 +1,34 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class App extends Application {
-    public static void main( String[] args ) {
-        launch(args);
-    }
+    private static final Logger logger = Logger.getLogger(App.class.getName());
 
     @Override
-    public void start(Stage primaryStage) {
-        TextField textField = new TextField();
-        textField.setPromptText("Enter the text here");
+    public void start(Stage stage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sample.fxml"));
+            Parent root = loader.load();
 
-        Button displayButton = new Button("Display");
-        displayButton.setOnAction(e -> {
-            String inputText = textField.getText();
-            System.out.println("Entered text: " + inputText);
-        });
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("FXML Example");
+            stage.show();
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Failed to load FXML file", e);
+        }
+    }
 
-        VBox root = new VBox(10, textField, displayButton);
-        root.setStyle("-fx-padding: 20; -fx-alignment: center;");
-
-        Scene scene = new Scene(root, 300, 200);
-
-        primaryStage.setTitle("JavaFX TextField Demo");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public static void main(String[] args) {
+        launch(args);
     }
 }
